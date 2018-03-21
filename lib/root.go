@@ -1,4 +1,4 @@
-package dbsm
+package dbsd
 
 import (
 	"database/sql"

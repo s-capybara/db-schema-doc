@@ -10,16 +10,16 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"github.com/s-capybara/db-schema-markdown/lib"
+	"github.com/s-capybara/db-schema-doc/lib"
 )
 
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "db-schema-markdown",
-	Short: "Generates database definition for Markdown from existing table",
-	Long: `"db-schema-markdown" is a CLI tool to generate a database definition document for Markdown
+	Use:   "db-schema-doc",
+	Short: "Generates table definition doc from existing table",
+	Long: `"db-schema-doc" is a CLI tool to generate a table definition doc
 from an existing database table.
 
 Positional arguments specify columns to show.`,
@@ -27,11 +27,11 @@ Positional arguments specify columns to show.`,
 }
 
 func Root(cmd *cobra.Command, args []string) {
-	dbsm.Root(Auth(), Table(), Columns(cmd, args))
+	dbsd.Root(Auth(), Table(), Columns(cmd, args))
 }
 
-func Auth() dbsm.Auth {
-	return dbsm.Auth{
+func Auth() dbsd.Auth {
+	return dbsd.Auth{
 		Username: viper.GetString("username"),
 		Password: viper.GetString("password"),
 		Database: viper.GetString("database")}
@@ -67,7 +67,7 @@ func Execute() {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default $HOME/.db-schema-markdown.yml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default $HOME/.db-schema-doc.yml)")
 	rootCmd.PersistentFlags().BoolP("full", "f", false, "shows all columns if true")
 
 	rootCmd.Flags().StringP("username", "u", "root", "username for database")
@@ -98,9 +98,9 @@ func initConfig() {
 			os.Exit(1)
 		}
 
-		// Search config in home directory with name ".db-schema-markdown" (without extension).
+		// Search config in home directory with name ".db-schema-doc" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".db-schema-markdown")
+		viper.SetConfigName(".db-schema-doc")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

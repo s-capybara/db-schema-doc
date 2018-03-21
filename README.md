@@ -1,11 +1,11 @@
-# db-schema-markdown
+# db-schema-doc
 
-A CLI tool to generate database definition doc for markdown document from a database table.
+A CLI tool to generate database definition doc for doc document from a database table.
 
 ## Usage
 
 ```sh
-db-schema-markdown -D my_database -t books
+db-schema-doc -D my_database -t books
 ```
 
 And then, you'll get in stdout:
@@ -21,19 +21,19 @@ And then, you'll get in stdout:
 ### Details
 
 ```
-"db-schema-markdown" is a CLI tool to generate a database definition document for Markdown
+"db-schema-doc" is a CLI tool to generate a table definition doc
 from an existing database table.
 
 Positional arguments specify columns to show.
 
 Usage:
-  db-schema-markdown [flags]
+  db-schema-doc [flags]
 
 Flags:
-      --config string     config file (default $HOME/.db-schema-markdown.yml)
+      --config string     config file (default $HOME/.db-schema-doc.yml)
   -D, --database string   database name
   -f, --full              shows all columns if true
-  -h, --help              help for db-schema-markdown
+  -h, --help              help for db-schema-doc
   -p, --password string   password for database
   -t, --table string      table name
   -u, --username string   username for database (default "root")
